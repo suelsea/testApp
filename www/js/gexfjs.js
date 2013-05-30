@@ -428,6 +428,9 @@ function initializeMap() {
             GexfJS.params.zoomLevel = ui.value;
         }
     });
+
+    alert('slider finishes');
+    
     $("#overviewzone").css({
         width : GexfJS.overviewWidth + "px",
         height : GexfJS.overviewHeight + "px"
