@@ -1,3 +1,37 @@
+var app = {
+    // Application Constructor
+    initialize: function() {
+        this.bindEvents();
+    },
+    // Bind Event Listeners
+    //
+    // Bind any events that are required on startup. Common events are:
+    // 'load', 'deviceready', 'offline', and 'online'.
+    bindEvents: function() {
+        document.addEventListener('deviceready', this.onDeviceReady, false);
+    },
+    // deviceready Event Handler
+    //
+    // The scope of 'this' is the event. In order to call the 'receivedEvent'
+    // function, we must explicity call 'app.receivedEvent(...);'
+    onDeviceReady: function() {
+        app.receivedEvent('deviceready');
+    },
+    // Update DOM on a Received Event
+    receivedEvent: function(id) {
+        var parentElement = document.getElementById(id);
+        var listeningElement = parentElement.querySelector('.listening');
+        var receivedElement = parentElement.querySelector('.received');
+
+        listeningElement.setAttribute('style', 'display:none;');
+        receivedElement.setAttribute('style', 'display:block;');
+
+        console.log('Received Event: ' + id);
+    }
+};
+
+
+
 /* Copyright (c) 2011 Raphaël Velt
  * Licensed under the MIT License
  * Translations by :
@@ -820,6 +854,12 @@ function setParams(paramlist) {
 
 $(document).ready(function() {
 
+    alert('document ready');
+
+    app.initialize();
+
+    alert('app init');
+
     console.log('ready, begin!');
     
     console.log('App loaded');
@@ -847,20 +887,20 @@ $(document).ready(function() {
     }
     
     updateButtonStates();
-    console.log('button states update;');
+    alert('button states update;');
     
     
     GexfJS.ctxGraphe = document.getElementById('carte').getContext('2d');
-    console.log('carte prepared');    
+    alert('carte prepared');    
    
     GexfJS.ctxMini = document.getElementById('overview').getContext('2d');
-    console.log('overview prepared');
+    alert('overview prepared');
     
     updateWorkspaceBounds();
-    console.log('workspace bound updated');
+    alert('workspace bound updated');
     
     initializeMap();
-    console.log('map initialized;');
+    alert('map initialized;');
     
     window.onhashchange = initializeMap;
     
