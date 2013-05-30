@@ -409,9 +409,13 @@ function onGraphScroll(evt, delta) {
 
 function initializeMap() {
     clearInterval(GexfJS.timeRefresh);
+
+    alert('clearInterval');
+
     GexfJS.oldParams = {};
     GexfJS.ctxGraphe.clearRect(0, 0, GexfJS.graphZone.width, GexfJS.graphZone.height);
-    console.log('clearRect');
+
+    alert('clearRect');
     
     $("#zoomSlider").slider({
         orientation: "vertical",
@@ -433,16 +437,16 @@ function initializeMap() {
         height : GexfJS.overviewHeight
     });
     
-    console.log('carte and overview set');
+    alert('set of carte and overview size');
     
     GexfJS.timeRefresh = setInterval(traceMap,60);
     GexfJS.graph = null;
     
-    console.log('loadgraph begins');
+    alert('loadgraph begins');
 
     loadGraph();
     
-    console.log('loadgraph finishes');
+    alert('loadgraph finishes');
 }
 
 function loadGraph() {
@@ -451,6 +455,7 @@ function loadGraph() {
         url: ( document.location.hash.length > 1 ? document.location.hash.substr(1) : GexfJS.params.graphFile ),
         dataType: "xml",
         success: function(data) {
+            alert('load graphFile success');
             var _s = new Date();
             var _g = $(data).find("graph"),
                 _nodes = _g.children().filter("nodes").children(),
@@ -463,6 +468,9 @@ function loadGraph() {
                 nodeIndexByLabel : [],
                 edgeList : []
             };
+
+            alert('graph parameter initialize');
+
             var _xmin = 1e9, _xmax = -1e9, _ymin = 1e9, _ymax = -1e9; _marge = 30;
             $(_nodes).each(function() {
                 var _n = $(this),
@@ -474,7 +482,8 @@ function loadGraph() {
                 _ymin = Math.min(_y, _ymin);
                 _ymax = Math.max(_y, _ymax);
             });
-            
+            alert('get address of each node');
+
             var _echelle = Math.min( ( GexfJS.baseWidth - _marge ) / ( _xmax - _xmin ) , ( GexfJS.baseHeight - _marge ) / ( _ymax - _ymin ) );
             var _deltax = ( GexfJS.baseWidth - _echelle * ( _xmin + _xmax ) ) / 2;
             var _deltay = ( GexfJS.baseHeight - _echelle * ( _ymin + _ymax ) ) / 2;
@@ -530,7 +539,7 @@ function loadGraph() {
                 GexfJS.ctxMini.fill();
             });
 
-            console.log('parameters of nodes finish');
+            alert('normalize, parameters of nodes finish');
             
             $(_edges).each(function() {
                 var _e = $(this),
@@ -566,7 +575,7 @@ function loadGraph() {
                 });
             });
 
-             console.log('parameters of edges finish');
+            alert('parameters of edges finish');
             
             GexfJS.imageMini = GexfJS.ctxMini.getImageData(0, 0, GexfJS.overviewWidth, GexfJS.overviewHeight);
         
@@ -887,7 +896,7 @@ $(document).ready(function() {
     }
     
     updateButtonStates();
-    alert('button states update;');
+    
     
     
     GexfJS.ctxGraphe = document.getElementById('carte').getContext('2d');
@@ -897,7 +906,7 @@ $(document).ready(function() {
     alert('overview prepared');
     
     updateWorkspaceBounds();
-    alert('workspace bound updated');
+
     
     initializeMap();
     alert('map initialized;');
