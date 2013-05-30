@@ -3,25 +3,55 @@
         <meta charset="utf-8" />
         <meta name="apple-mobile-web-app-capable" content="yes"/>
         <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
-        <link rel="stylesheet" type="text/css" href="css/index.css" />
+
+        
+        <link rel="stylesheet" type="text/css" href="style/gexfjs.css" />
+        <link rel="stylesheet" type="text/css" href="style/jquery-ui.css" />
+        
+
         <script src="cordova-2.4.0.js"></script>
-        <title>Hello World</title>
+        <title>Gephi: JavaScript GEXF Viewer</title>
     </head>
     <body>
-        <div class="app">
-            <h1>PhoneGap</h1>
-            <div id="deviceready" class="blink">
-                <p class="event listening">Connecting to Device</p>
-                <p class="event received">Device is Ready</p>
-            </div>
+         <div id="zonecentre" class="gradient">
+            <canvas id="carte" width="0" height="0"></canvas>
+            <ul id="ctlzoom">
+                <li>
+                    <a href="#" id="zoomPlusButton" title="S'approcher"> </a>
+                </li>
+                <li id="zoomSliderzone">
+                    <div id="zoomSlider"></div>
+                </li>
+                <li>
+                    <a href="#" id="zoomMinusButton" title="S'éloigner"> </a>
+                </li>
+                <li>
+                    <a href="#" id="lensButton"> </a>
+                </li>
+                <li>
+                    <a href="#" id="edgesButton"> </a>
+                </li>
+            </ul>
         </div>
-        <script type="text/javascript" src="js/index.js"></script>
-        <script type="text/javascript">
-            alert( "start js" );
-            var device = document.getElementById('deviceready');
-            alert( device.id );
-            app.initialize();
-             alert( "end js" );
-        </script>
+        <div id="overviewzone" class="gradient">
+            <canvas id="overview" width="0" height="0"></canvas>
+        </div>
+        <div id="leftcolumn">
+            <div id="unfold">
+                <a href="#" id="aUnfold" class="rightarrow"> </a>
+            </div>
+            <div id="leftcontent"></div>
+        </div>
+        <div id="titlebar">
+            <div id="maintitle">
+                <h1><a href="http://gephi.org/" target="_blank" title="Made with Gephi">Gephi: JavaScript GEXF Viewer</a></h1>
+            </div>
+            <form id="recherche">
+                <input id="searchinput" class="grey" autocomplete="off" />
+                <input id="searchsubmit" type="submit" />
+            </form>
+        </div>
+        <ul id="autocomplete">
+        </ul>
     </body>
 </html>
